@@ -60,7 +60,7 @@ tdl.textures.loadTexture = function(arg, opt_flipY, opt_callback) {
   }
   var id;
   if (typeof arg == 'string') {
-    td = arg;
+    id = arg;
   } else if (arg.length == 4 && typeof arg[0] == 'number') {
     id = arg.toString();
   } else if ((arg.length == 1 || arg.length == 6) &&

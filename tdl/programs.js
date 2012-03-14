@@ -463,6 +463,24 @@ tdl.programs.init_ = function() {
   }
 };
 
+tdl.programs.handleContextLost_ = function() {
+  if (gl.tdl && gl.tdl.programs && gl.tdl.programs.shaderDB) {
+    delete gl.tdl.programs.shaderDB;
+    delete gl.tdl.programs.programDB;
+  }
+};
+
+tdl.programs.init_ = function() {
+  if (!gl.tdl.programs) {
+    gl.tdl.programs = { };
+    tdl.webgl.registerContextLostHandler(tdl.programs.handleContextLost_, true);
+  }
+  if (!gl.tdl.programs.shaderDB) {
+    gl.tdl.programs.shaderDB = { };
+    gl.tdl.programs.programDB = { };
+  }
+};
+
 tdl.programs.Program.prototype.use = function() {
   gl.useProgram(this.program);
 };
