@@ -1,0 +1,31 @@
+{
+  "name": "tdl-di",
+  "version": "0.0.1",
+  "main": 
+  [
+    "./tdl/base.js"
+    "./tdl/buffers.js",
+    "./tdl/clock.js",
+    "./tdl/error.jpg",
+    "./tdl/fast.js",
+    "./tdl/fps.js",
+    "./tdl/framebuffers.js",
+    "./tdl/fullscreen.js",
+    "./tdl/io.js",
+    "./tdl/loader.js",
+    "./tdl/log.js",
+    "./tdl/math.js",
+    "./tdl/misc.js",
+    "./tdl/models.js",
+    "./tdl/particles.js",
+    "./tdl/primitives.js",
+    "./tdl/programs.js",
+    "./tdl/quaternions.js",
+    "./tdl/screenshot.js",
+    "./tdl/shader.js",
+    "./tdl/string.js",
+    "./tdl/sync.js",
+    "./tdl/textures.js",
+    "./tdl/webgl.js"
+  ]
+}
