@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": 
   [
-    "./tdl/base.js"
+    "./tdl/base.js",
     "./tdl/buffers.js",
     "./tdl/clock.js",
     "./tdl/error.jpg",
