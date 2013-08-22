@@ -116,7 +116,7 @@ tdl.textures.init_ = function(gl) {
     gl.tdl.textures = { };
     gl.tdl.textures.loadingImages = [];
     tdl.webgl.registerContextLostHandler(
-        tdl.textures.handleContextLost_, true);
+        gl.canvas, tdl.textures.handleContextLost_, true);
   }
   if (!gl.tdl.textures.maxTextureSize) {
     gl.tdl.textures.maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
@@ -185,6 +185,45 @@ tdl.textures.SolidTexture.prototype.recoverFromLostContext = function() {
 };
 
 tdl.textures.SolidTexture.prototype.bindToUnit = function(unit) {
+  gl.activeTexture(gl.TEXTURE0 + unit);
+  gl.bindTexture(gl.TEXTURE_2D, this.texture);
+};
+
+/**
+ * A depth texture.
+ * @constructor
+ * @param {number} width
+ * @param {number} height
+ */
+tdl.textures.DepthTexture = function(width, height) {
+  if (!gl.tdl.depthTexture) {
+    throw("depth textures not supported");
+  }
+  tdl.textures.Texture.call(this, gl.TEXTURE_2D);
+  this.width = width;
+  this.height = height;
+  this.uploadTexture();
+};
+
+tdl.base.inherit(tdl.textures.DepthTexture, tdl.textures.Texture);
+
+tdl.textures.DepthTexture.prototype.uploadTexture = function() {
+  gl.bindTexture(gl.TEXTURE_2D, this.texture);
+  gl.texImage2D(
+    gl.TEXTURE_2D, 0, gl.DEPTH_COMPONENT, this.width, this.height, 0,
+    gl.DEPTH_COMPONENT, gl.UNSIGNED_INT, null);
+  this.setParameter(gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  this.setParameter(gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  this.setParameter(gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  this.setParameter(gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+};
+
+tdl.textures.DepthTexture.prototype.recoverFromLostContext = function() {
+  tdl.textures.Texture.recoverFromLostContext.call(this);
+  this.uploadTexture();
+};
+
+tdl.textures.DepthTexture.prototype.bindToUnit = function(unit) {
   gl.activeTexture(gl.TEXTURE0 + unit);
   gl.bindTexture(gl.TEXTURE_2D, this.texture);
 };
@@ -377,8 +416,8 @@ tdl.textures.CubeMap = function(urls) {
       gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
       gl.TEXTURE_CUBE_MAP_NEGATIVE_Z];
     tdl.textures.CubeMap.offsets = [
-      [0, 1],
       [2, 1],
+      [0, 1],
       [1, 0],
       [1, 2],
       [1, 1],
