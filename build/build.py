@@ -13,6 +13,7 @@ from optparse import OptionParser
 VERBOSE = False
 JS_FILES = [
   "../tdl/base.js",
+  "./fakerequire.js",
   "../tdl/buffers.js",
   "../tdl/clock.js",
   "../tdl/fast.js",
@@ -34,7 +35,7 @@ JS_FILES = [
   "../tdl/string.js",
   "../tdl/sync.js",
   "../tdl/textures.js",
-  "../tdl/webgl.js",
+  "../tdl/webgl.js"
 ]
 
 def Execute(cmd, args, file=None):

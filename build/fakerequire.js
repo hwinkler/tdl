@@ -1,0 +1,1 @@
+tdl.require = function (){}
