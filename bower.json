@@ -1,6 +1,6 @@
 {
   "name": "tdl-di",
-  "version": "0.0.12",
+  "version": "0.1.12",
   "main": 
   [
     "./tdl/base.js",
