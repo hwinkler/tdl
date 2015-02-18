@@ -327,8 +327,8 @@ tdl.textures.Texture2D.prototype.setTexture = function(element) {
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, element);
   if (tdl.textures.isPowerOf2(element.width) &&
       tdl.textures.isPowerOf2(element.height)) {
-    this.setParameter(gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
     gl.generateMipmap(gl.TEXTURE_2D);
+    this.setParameter(gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
   } else {
     this.setParameter(gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     this.setParameter(gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
